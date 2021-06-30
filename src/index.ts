@@ -46,7 +46,6 @@ interface IRepo {
   if (!committedTimeResponseMap) return;
 
   let dawn = 0;
-  let daybreak = 0;
   let morning = 0;
   let daytime = 0;
   let evening = 0;
@@ -61,9 +60,8 @@ interface IRepo {
       /**
        * voting and counting
        */
-      if (hour >= 0 && hour < 4) dawn++;
-      if (hour >= 4 && hour < 8) daybreak++;
-      if (hour >= 8 && hour < 12) morning++;
+      if (hour >= 0 && hour < 6) dawn++;
+      if (hour >= 6 && hour < 12) morning++;
       if (hour >= 12 && hour < 16) daytime++;
       if (hour >= 16 && hour < 20) evening++;
       if (hour >= 20 && hour < 24) night++;
@@ -77,12 +75,11 @@ interface IRepo {
   if (!sum) return;
 
   const oneDay = [
-    { label: '🌙 dawn', commits: dawn },
-    { label: '🌞 daybreak', commits: daybreak },
-    { label: '🌇 morning', commits: morning },
-    { label: '🏙 daytime', commits: daytime },
-    { label: '🌃 evening', commits: evening },
-    { label: '🌌 night', commits: night },
+    { label: '🌙 Dawn', commits: dawn },
+    { label: '🌇 Morning', commits: morning },
+    { label: '🏙 Daytime', commits: daytime },
+    { label: '🌃 Evening', commits: evening },
+    { label: '🌌 Night', commits: night },
   ];
 
   const lines = oneDay.reduce((prev, cur) => {
@@ -112,7 +109,7 @@ interface IRepo {
     files: {
       [filename]: {
         // eslint-disable-next-line quotes
-        filename: (daybreak + morning + daytime) > (evening + night + dawn) ? "I'm an early 🐤" : "I'm a night 🦉",
+        filename: (morning + daytime) > (evening + night + dawn) ? "I'm an early 🐤" : "I'm a night 🦉",
         content: lines.join('\n'),
       },
     },
