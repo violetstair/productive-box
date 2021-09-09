@@ -71,7 +71,7 @@ interface IRepo {
   /**
    * Next, generate diagram
    */
-  const sum = morning + daytime + evening + night;
+  const sum = dawn + morning + daytime + evening + night;
   if (!sum) return;
 
   const oneDay = [
